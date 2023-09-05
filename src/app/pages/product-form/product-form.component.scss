@@ -1,0 +1,43 @@
+.form-container {
+    background-color: white;
+
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 2px solid var(--light-gray4);
+        min-height: 60px;
+        padding: 20px;
+        position: relative;
+
+        .btn {
+            padding: 5px;
+            position: absolute;
+            right: 20px;
+        }
+    }
+
+    .content {
+        padding: 12px;
+
+        .form-controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1rem;
+            max-width: 505px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin-block: 10px;
+
+            .primary {
+                min-width: 81px;
+            }
+        }
+    }
+}

@@ -1,0 +1,70 @@
+<div class="form-container">
+    <div class="header">
+        <h1>Formulario de {{ isEdit ? 'Edición' : 'Registro' }}</h1>
+        <a class="btn small" href="/"><span class="icon close-icon"></span></a>
+    </div>
+    <div class="content">
+        <form [formGroup]="form" (submit)="onSubmit($event)">
+            <div class="form-controls">
+                <div class="form-field" [class.disabled]="isEdit">
+                    <label for="id">ID</label>
+                    <input
+                        type="text" id="id" formControlName="id"
+                        [class.invalid]="isInvalid('id')"
+                    >
+                    <div *ngFor="let error of getErrors('id', 'ID')" class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="name">Nombre</label>
+                    <input
+                        type="text" id="name" formControlName="name"
+                        [class.invalid]="isInvalid('name')"
+                    >
+                    <div *ngFor="let error of getErrors('name', 'Nombre')" class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="description">Descripción</label>
+                    <input
+                        type="text" id="description" formControlName="description"
+                        [class.invalid]="isInvalid('description')"
+                    >
+                    <div *ngFor="let error of getErrors('description', 'Descripción')" class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="logo">Logo</label>
+                    <input
+                        type="text" id="logo" formControlName="logo"
+                        [class.invalid]="isInvalid('logo')"
+                    >
+                    <div *ngFor="let error of getErrors('logo', 'Logo')" class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                </div>
+                <div class="form-field">
+                    <label for="release">Fecha Liberación</label>
+                    <input
+                        type="date" id="release" formControlName="date_release" [min]="today"
+                        [class.invalid]="isInvalid('date_release')"
+                    >
+                    <div *ngFor="let error of getErrors('date_release', 'Fecha Liberación')" class="invalid-feedback">
+                        {{ error }}
+                    </div>
+                </div>
+                <div class="form-field disabled">
+                    <label for="revision">Fecha Revisión</label>
+                    <input type="date" id="revision" formControlName="date_revision">
+                </div>
+            </div>
+            <div class="form-actions">
+                <button type="reset">Reiniciar</button>
+                <button class="primary" type="submit" [disabled]="form.invalid || form.pristine">Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
