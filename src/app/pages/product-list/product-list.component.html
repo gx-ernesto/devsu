@@ -1,0 +1,87 @@
+<div class="search-bar space-between">
+    <input
+        type="search" placeholder="Buscar..."
+        [(ngModel)]="search" (ngModelChange)="onSearch()"
+    >
+    <button class="primary" (click)="onAdd()">Agregar</button>
+</div>
+<div class="table-container">
+    <div class="table-responsive">
+        <table>
+            <thead>
+                <tr>
+                    <th class="logo-header">Logo</th>
+                    <th>Nombre del producto</th>
+                    <th>
+                        Descripción
+                        <span class="info">i</span>
+                        <span class="info-text">Descripción del Producto</span>
+                    </th>
+                    <th>
+                        Fecha de liberación
+                        <span class="info">i</span>
+                        <span class="info-text">Fecha a liberar el producto para los clientes en general</span>
+                    </th>
+                    <th>
+                        Fecha de reestructuración
+                        <span class="info">i</span>
+                        <span class="info-text">Fecha de revisión del producto para cambiar Términos y Condiciones</span>
+                    </th>
+                    <th class="action-header"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of paged; index as i">
+                    <td class="logo-cell">
+                        <div class="logo">
+                            <img class="logo-image" [src]="product.logo">
+                        </div>
+                    </td>
+                    <td class="name-cell">{{ product.name }}</td>
+                    <td class="description-cell">{{ product.description }}</td>
+                    <td>{{ product.date_release | date: 'dd/MM/yyyy' }}</td>
+                    <td>{{ product.date_revision | date: 'dd/MM/yyyy' }}</td>
+                    <td>
+                        <ng-container
+                            *ngTemplateOutlet="menu; context: { $implicit: product, i }"
+                        ></ng-container>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="no-results" *ngIf="!filtered.length">
+            <span class="icon search-icon"></span>
+            <span class="message">No se encontraron resultados.</span>
+        </div>
+    </div>
+    <div class="table-footer space-between">
+        <span class="results">{{ filtered.length }} Resultados</span>
+        <div class="pagination">
+            <button class="small" (click)="goToPage('prev')">&lt;</button>
+            <span>{{ currentPage }}/{{ totalPages }}</span>
+            <button class="small" (click)="goToPage('next')">&gt;</button>
+            <select [(ngModel)]="itemsPerPage" (ngModelChange)="onItemsPerPageChange()">
+                <option [ngValue]="5" selected>5</option>
+                <option [ngValue]="10">10</option>
+                <option [ngValue]="25">25</option>
+                <option [ngValue]="50">50</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<ng-template #menu let-product let-index="i">
+    <div class="dropdown">
+        <button
+            class="small trigger"
+            [class.active]="openMenu === index"
+            (click)="toggleMenu(index)"
+        >
+            <span class="icon menu-icon"></span>
+        </button>
+        <ul *ngIf="openMenu === index" class="dropdown-content">
+            <li><a class="item" (click)="onEdit(product)">Editar</a></li>
+            <li><a class="item" (click)="onDelete(product.id)">Eliminar</a></li>
+        </ul>
+      </div>
+</ng-template>
