@@ -1,0 +1,29 @@
+:host {
+    min-width: 250px;
+}
+
+header {
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 62px;
+    width: 100%;
+
+    .app-logo {
+        background-image: url(/assets/images/logo.png);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        height: 55px;
+        width: 200px;
+        min-width: 200px;
+    }
+}
+
+main {
+    margin-top: 30px;
+    margin-inline: auto;
+    padding-inline: 10px;
+    max-width: 1024px;
+}
